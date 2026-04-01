@@ -9,12 +9,12 @@ sudo apt install build-essential libncurses-dev iwd
 
 ## Compile
 ```
-gcc -Wall -o iwmenu iwmenu.c -lncurses
+gcc -Wall -o iwmenu iwdwifi.c -lncurses
 ```
 
 ## Run
 ```
-sudo ./iwmenu
+sudo ./iwdwifi
 ```
 
 ## First-time setup
