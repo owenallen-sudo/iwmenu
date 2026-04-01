@@ -1,6 +1,6 @@
 # iwmenu
 
-iwmenu is a tool like NetworkManager's nmtui, acting as a TUI menu for native iwd. Written in C using ncurses (~1170 lines), it allows manual configuration of SSID, passphrase, MTU, DNS, BSSID, and device name. The C source code is provided in this repository.
+iwmenu is a tool acting like NetworkManager's nmtui (without the NetworkManager or scanning for networks overhead), acting as a TUI menu for native iwd. Written in C using ncurses (~1170 lines), it allows manual configuration of SSID, passphrase, MTU, DNS, BSSID, and device name. The C source code is provided in this repository.
 
 ## Dependencies
 ```
