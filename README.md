@@ -26,4 +26,4 @@ sudo systemctl enable --now systemd-networkd
 sudo systemctl enable --now systemd-resolved
 sudo ln -sf /run/systemd/resolve/stub-resolv.conf /etc/resolv.conf
 ```
-This project is licensed under the Mozilla Public License 2.0. Any modified version of my iwmenu.c file that gets distributed must remain under this license and stay open-source due to legal rights. Please see the LICENSE file for the full terms. 
+This project is licensed under the Mozilla Public License 2.0. Any modified version of my iwmenu.c file that gets distributed must remain under this license and stay open-source due to legal rights. Please see the LICENSE file for the full terms. Other users are free to modify and distribute this file if they follow the MPL 2.0 licensing agreements.
