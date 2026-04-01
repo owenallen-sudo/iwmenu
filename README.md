@@ -26,3 +26,4 @@ sudo systemctl enable --now systemd-networkd
 sudo systemctl enable --now systemd-resolved
 sudo ln -sf /run/systemd/resolve/stub-resolv.conf /etc/resolv.conf
 ```
+This project is licensed under the Mozilla Public License 2.0. See the LICENSE file for more details.
