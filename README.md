@@ -1,6 +1,6 @@
 # iwdwifi
 
-iwdwifi is a tool governed by the MPL v. 2.0 license. It acts like NetworkManager's nmtui (without the overhead from NetworkManager or scanning for networks), acting as a TUI menu for native iwd. Written in C using ncurses (~1170 lines), it allows manual configuration of SSID, passphrase, MTU, DNS, BSSID, and device name. The C source code is provided in this repository. If you have any issues please tell me.
+iwdwifi is a tool governed by the MPL v. 2.0 license. It acts like NetworkManager's nmtui (without the overhead from NetworkManager or scanning for networks), acting as a TUI menu for native iwd. Written in C using ncurses (~1170 lines), it allows manual configuration of SSID, passphrase, MTU, DNS, BSSID, and device name. The C source code is provided in this repository. If you have any issues please tell me. Admittedly this only has a minimal networking performance boost, but a boost nevertheless and sometimes that little bit matters, hope this helps others as much as it helped me.
 
 ## Dependencies
 ```
