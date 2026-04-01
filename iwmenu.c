@@ -2,8 +2,8 @@
 This Source code Form is subject to the terms of the Mozilla Public License, v. 2.0.
 If a copy of the MPL was not distributed with this file, You can obtain one at
 http://mozilla.org/MPL/2.0/.
-It is a breach of the license terms to distribute this file without the Mozilla Public License v. 2.0 and any re-distributed version of this file must be open-source.
-For more details see the LICENSE.
+It is a breach of the license terms to distribute this file without the Mozilla Public License v. 2.0, it states that any distributed version of this file must be open-source etc.
+For more details see the LICENSE file or http://mozilla.org/MPL/2.0/.
  * iwmenu.c  —  nmtui-style TUI WiFi manager for pure iwd on Debian
  *
  * DESCRIPTION
