@@ -90,6 +90,7 @@ typedef struct {
     char mtu[16];                /* MTU as decimal string, e.g. "1360"        */
     char device_mac[18];         /* Spoof our NIC's MAC; empty = use real MAC */
     char bssid[18];              /* Lock to this AP MAC; empty = any AP       */
+    char ip_mode[8]; /* "ipv4", "ipv6", "dual" */
 } NetworkProfile;
 
 /* ── Global state ────────────────────────────────────────────────────────── */
@@ -192,6 +193,7 @@ static void write_config(void)
         fprintf(f, "mtu=%s\n",           p->mtu);
         fprintf(f, "device_mac=%s\n",    p->device_mac);
         fprintf(f, "bssid=%s\n",         p->bssid);
+        fprintf(f, "ip_mode=%s\n", p->ip_mode);
         fprintf(f, "\n");                /* Blank line separates blocks       */
     }
     fclose(f);                           /* Flush kernel buffer and close     */
@@ -248,6 +250,7 @@ static void read_config(void)
         else if (!strcmp(key, "mtu"))            strncpy(cur->mtu,           val, 15);
         else if (!strcmp(key, "device_mac"))     strncpy(cur->device_mac,    val, 17);
         else if (!strcmp(key, "bssid"))          strncpy(cur->bssid,         val, 17);
+        else if (!strcmp(key, "ip_mode"))        strncpy(cur->ip_mode,       val, 7);
     }
     fclose(f);
 }
@@ -384,7 +387,10 @@ static void write_networkd_config(const NetworkProfile *p)
 
     /* [Network] — IP layer settings                                         */
     fprintf(f, "[Network]\n");
-    fprintf(f, "DHCP=ipv4\n");                        /* Enable DHCPv4       */
+    const char *mode = (p->ip_mode[0] == '\0') ? "ipv4" : p->ip_mode;
+    if      (!strcmp(mode, "dual")) fprintf(f, "DHCP=yes\n");
+    else if (!strcmp(mode, "ipv6")) fprintf(f, "DHCP=ipv6\n");
+    else                            fprintf(f, "DHCP=ipv4\n");
     fprintf(f, "DNS=%s\n", p->dns_primary);           /* Primary DNS server  */
     if (p->dns_secondary[0] != '\0')                  /* Only if provided    */
         fprintf(f, "DNS=%s\n", p->dns_secondary);     /* Secondary DNS server*/
@@ -867,11 +873,18 @@ static int run_add_form(NetworkProfile *p, const char *title)
                     strncpy(p->dns_primary, DEFAULT_DNS1, 63);
                 if (p->mtu[0] == '\0')
                     strncpy(p->mtu, DEFAULT_MTU, 15);
+                if (p->ip_mode[0] == '\0')
+                    strncpy(p->ip_mode, "ipv4", 7);
 
                 /* SSID is mandatory */
                 if (p->ssid[0] == '\0') {
                     show_message("SSID cannot be empty!");
                 } else {
+                    const char *modes[] = { "IPv4 only", "IPv6 only", "Dual (IPv4+IPv6)" };
+                    int m = run_menu("IP Mode", modes, 3, 8, 30);
+                    if (m == 0)      strncpy(p->ip_mode, "ipv4", 7);
+                    else if (m == 1) strncpy(p->ip_mode, "ipv6", 7);
+                    else if (m == 2) strncpy(p->ip_mode, "dual", 7);
                     delwin(win);
                     return 0;            /* OK — profile is populated         */
                 }
